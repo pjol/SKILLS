@@ -1,0 +1,4 @@
+interface:
+  display_name: "User-Facing App Context"
+  short_description: "Reusable app layout and design context."
+  default_prompt: "Use $user-facing-app-context to scaffold a polished user-facing web app shell without copying domain-specific pipeline logic."
