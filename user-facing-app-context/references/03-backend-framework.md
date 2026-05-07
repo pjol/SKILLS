@@ -32,7 +32,10 @@ This makes tests and future apps easier because the server is assembled from exp
 ## Config Pattern
 
 - `config.Config` contains typed env values and defaults.
-- Support `ENV_FILE=/path/to/.env`.
+- Load env files before reading typed config or validating required values.
+- Find the project root from either repo-root or `backend/` working directories.
+- Load root `.env` first, then `backend/.env`, then optional `ENV_FILE=/path/to/.env`.
+- Preserve precedence: real process/shell environment variables override every env-file value; later env files may override earlier env-file values.
 - Keep backend secrets out of frontend env.
 - Use `NEXT_PUBLIC_*` only for browser-safe config.
 - Accept local stub flags for development-only provider bypasses.

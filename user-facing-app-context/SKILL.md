@@ -25,6 +25,7 @@ Use this skill to recreate the reusable parts of this app: a polished consumer-f
 4. Replace all domain nouns, products, prices, copy, and route labels with the new app's vocabulary.
 5. Exclude domain-specific generation pipelines, prompt catalog logic, queue mechanics, model calls, and private product internals unless the new app explicitly needs its own equivalent.
 6. Preserve safety patterns: server-enforced pricing and permissions, HTTP-only session cookies, CSRF for cookie-auth unsafe requests, guest access tokens, validated uploads, admin gates, friendly JSON errors, and non-secret `NEXT_PUBLIC_*` boundaries.
+7. Load backend env files before config validation: root `.env`, then `backend/.env`, then optional `ENV_FILE=/path/to/file`; real shell environment variables must remain highest precedence.
 
 ## Default Workflow
 
