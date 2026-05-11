@@ -7,7 +7,7 @@ This reference captures the reusable app structure. It intentionally avoids the 
 ```text
 repo/
 ├── frontend/          Next.js App Router app
-├── backend/           Go API server
+├── backend/           API server; use $backend-setup for implementation details
 ├── docs/              Operational notes and smoke-test docs
 ├── scripts/           Repo utilities
 ├── context-tree/      Product-specific notes; do not treat as reusable wholesale
@@ -44,27 +44,13 @@ frontend/
 └── eslint.config.mjs               Next core-web-vitals + TS linting
 ```
 
-## Backend Layout
+## Backend Boundary
 
 ```text
-backend/
-├── cmd/server/main.go              HTTP entrypoint and graceful signal context
-├── bootstrap/runtime.go            Runtime assembly and startup jobs
-├── config/config.go                Env parsing and defaults
-├── router/router.go                chi routes, CORS, middleware, aliases
-├── handlers/                       HTTP handlers, middleware, OpenAPI, tests
-├── db/                             pgxpool accessors and embedded schema.sql
-├── models/                         JSON/data structs
-├── services/
-│   ├── alerts/                     Admin alert fan-out
-│   ├── email/                      Mail service with local fallback
-│   ├── logs/                       In-memory admin-visible log buffer
-│   ├── payments/                   Provider abstractions, webhooks, billing sync
-│   ├── security/                   Tokens, password hashing, digests
-│   ├── storage/                    S3-compatible object storage
-│   └── upload/                     Upload validation and normalization
-└── go.mod                          Go 1.25, chi, pgx, godotenv, Mailgun
+backend/                            API backend built from $backend-setup
 ```
+
+Use `$backend-setup` for package layout, preferred Go packages, config/env loading, Postgres setup, router/middleware shape, auth/CSRF, billing/uploads/email/support services, logging, and backend tests.
 
 ## Route Families
 

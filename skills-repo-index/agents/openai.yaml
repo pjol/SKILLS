@@ -1,0 +1,4 @@
+interface:
+  display_name: "Skills Repo Index"
+  short_description: "Index of this skills repository."
+  default_prompt: "Use $skills-repo-index to choose the right local skill before working in this skills repository."

@@ -9,7 +9,7 @@
    - order/request/history object
    - admin-managed configuration
    - support categories
-3. Scaffold `frontend/` and `backend/` as sibling folders.
+3. Scaffold `frontend/` and `backend/` as sibling folders; use `$backend-setup` for the backend.
 4. Keep `.env.example`, `frontend/.env.example`, and `backend/.env.example` aligned.
 5. Build the public home, auth, app shell, settings/billing, history, feedback/support, legal, and admin shell before deep domain workflows.
 6. Add domain-specific flows only after the reusable shell is stable.
@@ -35,7 +35,7 @@
 - Feedback/support page with attachments and admin response path.
 - Device-local recovery IDs when guest checkout or no-login flows exist.
 - Global footer with support, history/recovery, legal, and informational links.
-- Go runtime assembly, typed config, chi router, PostgreSQL via pgxpool as the default runtime store, embedded schema initialization, service packages.
+- Backend foundations from `$backend-setup`.
 - Server-side enforcement for pricing, roles, ownership, and entitlements.
 
 ## What To Leave Behind
@@ -44,6 +44,7 @@
 - Prompt/catalog concepts that only exist for the old product.
 - Model-specific rate limit queues and image-generation accounting.
 - Domain-specific tables unless the new product needs direct analogs.
+- Stubbed content, mock data, demo rows, fake product outputs, or placeholder provider results.
 - Old product copy, examples, prices, and screenshots.
 - Any private keys, provider-specific live IDs, or real user data.
 
@@ -63,35 +64,7 @@
 
 ## Environment Checklist
 
-Backend:
-
-```env
-APP_ENV=development
-APP_BASE_URL=http://localhost:3000
-API_BASE_URL=http://localhost:8080
-SERVER_ADDR=:8080
-CORS_ALLOWED_ORIGINS=http://localhost:3000
-DATABASE_URL=postgres://user:pass@localhost:5432/app?sslmode=disable
-SESSION_COOKIE_NAME=app_session
-CSRF_TOKEN_COOKIE_NAME=app_csrf
-PASSWORD_PEPPER=change-me
-PASSWORD_PREHASH_SALT=app:password-prehash:v1
-PASSWORD_PREHASH_VERSION=app-pwhash-v1
-GUEST_ACCESS_TOKEN_SECRET=change-me
-MAILGUN_DOMAIN=
-MAILGUN_API_KEY=
-MAILGUN_FROM_EMAIL=App <no-reply@example.com>
-ADMIN_ALERT_EMAILS=ops@example.com
-ADMIN_USER_EMAILS=admin@example.com
-STORAGE_BUCKET=
-STORAGE_REGION=us-east-1
-STORAGE_ENDPOINT=
-STORAGE_ACCESS_KEY_ID=
-STORAGE_SECRET_ACCESS_KEY=
-STRIPE_SECRET_KEY=
-STRIPE_WEBHOOK_SECRET=
-ALLOW_STUB_PAYMENTS=true
-```
+Use `$backend-setup` for backend env variables, log path defaults, database URL, cookie names, provider secrets, and backend-local path rules.
 
 Frontend:
 
@@ -104,7 +77,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 ## Build Order
 
 1. Create shared tokens, globals, `Brand`, `PublicNav`, `AppShell`, `SiteFooter`, and `LoadableImage`.
-2. Implement backend config, DB open/init, auth/session/CSRF, `/me`, and health.
+2. Use `$backend-setup` to implement backend config, DB open/init, auth/session/CSRF, `/me`, health, logging, and service boundaries.
 3. Build auth pages and verification flow.
 4. Build settings/account page.
 5. Add billing/entitlement service and frontend payment surfaces.
@@ -117,7 +90,7 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=
 ## Validation Checklist
 
 - `frontend`: `npm run lint`, `npm run build`.
-- `backend`: `go test ./...`.
+- `backend`: use `$backend-setup` validation; default is `go test ./...`.
 - Mobile viewport:
   - nav menus open, close, and fit.
   - no button text overflows.
