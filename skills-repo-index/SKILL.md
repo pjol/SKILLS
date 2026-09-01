@@ -48,7 +48,23 @@ Load order inside the skill:
 
 Do not use it to copy product-specific generation pipelines, private prompts, model queues, old product nouns, prices, screenshots, live IDs, or user data.
 
+### `time-accounting/`
+
+Measuring how long work actually took, and writing the figure down honestly.
+
+Use it for:
+
+- Any output that carries hours: branch scopes, work logs, status notes, estimates, invoices.
+- Auditing an hours figure that looks wrong, or one written before this skill existed.
+- Installing the `UserPromptSubmit` timestamp hook that makes elapsed time visible live.
+
+Carries `scripts/measure_sittings.py`, which clusters session-transcript timestamps into sittings on a 30-minute gap and prints the measured total.
+
+Independent of the app-building family below — it applies to any work in any repo.
+
 ## Skill Families
+
+`time-accounting` stands alone: it is about reporting work, not building it, and has no hub.
 
 `user-facing-app-context` is the root hub for B2C app-building skills. `backend-setup` is the backend foundation it delegates to. Future skills in that family should be more focused satellites, such as provider-specific payments, deployment, analytics, image/media workflows, admin tooling, or frontend component patterns.
 

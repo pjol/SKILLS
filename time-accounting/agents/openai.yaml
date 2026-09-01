@@ -1,0 +1,4 @@
+interface:
+  display_name: "Time Accounting"
+  short_description: "Measure hours from the clock, not from diff size."
+  default_prompt: "Use $time-accounting to measure how long this work actually took before writing any hours down."
