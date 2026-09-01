@@ -138,5 +138,13 @@ record.
 ## Maintenance
 
 - Keep the hook snippet here in step with the one actually installed.
-- If a project keeps its own copy of this method (e.g. `docs/TIME_ESTIMATION.md`),
-  that copy points here; do not let the two drift.
+- Published from the public repo <https://github.com/pjol/SKILLS> as
+  `time-accounting/`. Consumers pull it over the network with no credentials —
+  `curl -fsSL https://raw.githubusercontent.com/pjol/SKILLS/main/time-accounting/SKILL.md` —
+  so **an edit only reaches them once it is pushed to `main`**. Check
+  `git status` here before assuming a change is live.
+- If a project keeps its own copy of this method (e.g. SFLUV/app's
+  `docs/TIME_ESTIMATION.md`), that copy points here; do not let the two drift.
+- Measured figures belong in the consuming repo's own record — for SFLUV/app,
+  `branch-scopes/<branch-name>.md`. This skill supplies the method and the
+  number, never the storage.
