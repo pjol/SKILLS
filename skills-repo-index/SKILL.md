@@ -1,6 +1,6 @@
 ---
 name: skills-repo-index
-description: Index and governance map for this skills repository. Use when orienting in or maintaining the repo, choosing which local skill to invoke, adding or updating skills, or routing app-building work through the user-facing-app-context and backend-setup hubs.
+description: Index and governance map for this skills repository. Use when orienting in or maintaining the repo, choosing which local skill to invoke, adding or updating skills, or routing app-building work to the scaffold skill tree.
 ---
 
 # Skills Repo Index
@@ -13,40 +13,19 @@ Keep this skill concise. Do not duplicate detailed instructions from child skill
 
 ## Current Catalog
 
-### `backend-setup/`
+### `scaffold/`
 
-Backend foundation skill for reusable Go/Postgres API services.
-
-Use it for:
-
-- Go service layout, preferred packages, and runtime assembly.
-- Env/config loading, backend-local path anchoring, and Postgres via pgxpool.
-- Router/middleware shape, auth/CSRF/admin gates, billing, uploads, email, support, and service boundaries.
-- GAEA-derived activity/error JSONL logging, request logging, and backend validation.
-
-This skill is the backend source of truth for `user-facing-app-context`.
-
-### `user-facing-app-context/`
-
-Hub skill for spinning up polished consumer-facing web apps quickly.
+A pointer to the app-building skill tree and toolset. The skill lives in its own private repo, `github.com/pjol/scaffold`, cloned at `~/scaffold`.
 
 Use it for:
 
-- B2C or prosumer app shells.
-- Next.js App Router frontends with Tailwind and lucide icons.
-- Backend-facing app surfaces that delegate backend implementation details to `backend-setup`.
-- Shared app surfaces: public home, auth, settings/billing, history/recovery, support, legal, admin, share/download, and machine-readable routes.
-- Reusable design-system and implementation preferences for compact, tactile, responsive apps.
+- Starting a new app on the shared stack: a Go API (chi, pgxpool, Postgres, S3, Clerk), a Next.js web app and an Expo mobile app.
+- Adding feature modules to an existing scaffold project, or reviewing a project against the foundation.
+- Design system and process, env naming, dev-up, project docs and store compliance.
 
-Load order inside the skill:
+Load order: `scaffold/SKILL.md` here → `~/scaffold/SKILL.md` → `~/scaffold/concrete/SKILL.md` or `~/scaffold/feature-belt/SKILL.md`, depending on the task.
 
-1. `references/00-app-map.md` for the reusable route and app-boundary map.
-2. `references/01-frontend-framework.md` before frontend routes, components, auth flow, API clients, navigation, or browser storage.
-3. `references/02-design-system.md` before user-facing UI decisions.
-4. `backend-setup/` before API, auth, billing, storage, support, observability, or backend behavior.
-5. `references/04-implementation-playbook.md` before scaffolding or porting the pattern into a new app.
-
-Do not use it to copy product-specific generation pipelines, private prompts, model queues, old product nouns, prices, screenshots, live IDs, or user data.
+Replaced `backend-setup` and `user-facing-app-context`, which were removed on 2026-10-31 and are still in git history.
 
 ### `time-accounting/`
 
@@ -60,20 +39,19 @@ Use it for:
 
 Carries `scripts/measure_sittings.py`, which clusters session-transcript timestamps into sittings on a 30-minute gap and prints the measured total.
 
-Independent of the app-building family below — it applies to any work in any repo.
+Independent of the app-building family: it applies to any work in any repo.
 
 ## Skill Families
 
 `time-accounting` stands alone: it is about reporting work, not building it, and has no hub.
 
-`user-facing-app-context` is the root hub for B2C app-building skills. `backend-setup` is the backend foundation it delegates to. Future skills in that family should be more focused satellites, such as provider-specific payments, deployment, analytics, image/media workflows, admin tooling, or frontend component patterns.
+`scaffold` is the hub for building apps. Its sub-skills (`concrete`, `feature-belt`) and its feature modules live in the scaffold repo, not here. New app-building work goes into that repo: a foundation rule into `concrete/`, a reusable feature into `feature-belt/`. Add a satellite skill here only when it is narrower than scaffold and doesn't belong in an app: for example deployment runbooks or provider-account setup.
 
 When adding a satellite skill:
 
 - Make the satellite's trigger narrower than the hub.
-- Reference the hub when the satellite assumes the same frontend/backend/design posture.
-- Keep framework-wide defaults in the hub unless the satellite needs task-specific detail.
-- Avoid copying hub reference content into the satellite.
+- Reference the hub when the satellite assumes the same stack and design posture.
+- Avoid copying hub content into the satellite.
 
 ## Routing Workflow
 

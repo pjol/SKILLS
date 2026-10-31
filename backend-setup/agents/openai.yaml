@@ -1,4 +1,0 @@
-interface:
-  display_name: "Backend Setup"
-  short_description: "Go backend setup patterns."
-  default_prompt: "Use $backend-setup to scaffold or review the Go/Postgres API backend for this app."
