@@ -128,6 +128,22 @@ Not honest:
 Round to 0.1h. Where a measured total and an itemised split disagree, **the
 measured total wins** and the split is adjusted to it.
 
+## Reporting weeks
+
+When hours are kept by week, a week runs from **Monday 12:00 noon Pacific** to
+the following **Monday 12:00 noon Pacific** (PST or PDT, whichever is in force),
+and is named for the Monday it starts on.
+
+- Monday morning belongs to the week before. A week file named for Nov 16 begins
+  at noon on Nov 16; everything from Nov 16 00:00 to 11:59 is in the Nov 9 file.
+- A sitting that runs across noon on Monday is split at noon, and each part is
+  recorded in its own week, with the split stated.
+- Stated time (meetings, time before a session's first message) follows the same
+  boundary: its window decides its week.
+
+Adopted Nov 16, 2026. Weeks before that ran Monday to Sunday at midnight, and
+are left as they were written.
+
 ## Correcting a figure already published
 
 State the correction; do not silently restate the number. A reader who saw the
@@ -146,5 +162,6 @@ record.
 - If a project keeps its own copy of this method (e.g. SFLUV/app's
   `docs/TIME_ESTIMATION.md`), that copy points here; do not let the two drift.
 - Measured figures belong in the consuming repo's own record — for SFLUV/app,
-  `branch-scopes/<branch-name>.md`. This skill supplies the method and the
-  number, never the storage.
+  `branch-scopes/<handle>/week-<YYYY-MM-DD>.md`, one file per person per week
+  as defined above. This skill supplies the method and the number, never the
+  storage.
